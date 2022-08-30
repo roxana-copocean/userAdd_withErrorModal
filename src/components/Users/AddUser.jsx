@@ -7,7 +7,7 @@ import ErrorModal from './ErrorModal';
 export default function AddUser(props) {
 	const [ enteredUsername, setEnteredUsername ] = useState('');
 	const [ enteredAge, setEnteredAge ] = useState('');
-	const [error, setError] = useState()
+	const [ error, setError ] = useState();
 
 	const usernameChangeHandler = (event) => {
 		setEnteredUsername(event.target.value);
@@ -20,16 +20,16 @@ export default function AddUser(props) {
 		event.preventDefault();
 		if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
 			setError({
-				title: "Invalid input",
-				message: "Please enter a valid name and age!"
-			})
+				title: 'Invalid input',
+				message: 'Please enter a valid name and age!'
+			});
 			return;
 		}
 		if (+enteredAge < 1) {
 			setError({
-				title: "Invalid age!",
-				message: "Please enter a valid age!"
-			})
+				title: 'Invalid age!',
+				message: 'Please enter a valid age!'
+			});
 			return;
 		}
 		props.onAddUser(enteredUsername, enteredAge);
@@ -38,12 +38,12 @@ export default function AddUser(props) {
 	};
 
 	const errorHandler = () => {
-		setError(null)
-	}
+		setError(null);
+	};
 
 	return (
-		<>
-			{ error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}
+		<React.Fragment>
+			{error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler} />}
 			<Card className={styles.input}>
 				<form onSubmit={addUserHandler}>
 					<label htmlFor="username">Username</label>
@@ -53,6 +53,6 @@ export default function AddUser(props) {
 					<Button type="submit">Add User</Button>
 				</form>
 			</Card>
-		</>
+		</React.Fragment>
 	);
 }
